@@ -2,19 +2,19 @@ import express, { urlencoded } from 'express';
 const router = express.Router();
 
 let productos = [
-    // {
-    //   id: 1,
-    //   nombre: 'Escuadra',
-    //   precio: 200,
-    //   foto: 'https://media.istockphoto.com/photos/wooden-ruler-picture-id186824125?s=612x612'
-    // },
-    // {
-    //   id: 2,
-    //   nombre: 'Transportador',
-    //   precio: 50,
-    //   foto: 'https://images.pexels.com/photos/5905610/pexels-photo-5905610.jpeg?cs=srgb&dl=pexels-katerina-holmes-5905610.jpg&fm=jpg'
+    {
+      id: 1,
+      nombre: 'Escuadra',
+      precio: 200,
+      foto: 'https://media.istockphoto.com/photos/wooden-ruler-picture-id186824125?s=612x612'
+    },
+    {
+      id: 2,
+      nombre: 'Transportador',
+      precio: 50,
+      foto: 'https://images.pexels.com/photos/5905610/pexels-photo-5905610.jpeg?cs=srgb&dl=pexels-katerina-holmes-5905610.jpg&fm=jpg'
 
-    // },
+    },
 ];
 class Productos{
     listar(data){

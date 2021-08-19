@@ -27,7 +27,7 @@ export const initWsServer = (server) => {
 
       //Send a message to the newUser
       data.username = 'CHATBOT';
-      data.text = 'Bienvenido!';
+      data.text = 'Bienvenido! ';
       socket.emit('message', formatMessages(data));
 
       data.text = `${user.username} se ha unido al chat!`;
