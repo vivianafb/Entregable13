@@ -5,6 +5,6 @@ export const formatMessages = (data) => {
   return {
     username,
     text,
-    time: moment().format('h:mm a'),
+    time: moment().format('DD/MM/YYY hh:mm:ss'),
   };
 };
