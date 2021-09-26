@@ -2,16 +2,20 @@ import express from 'express';
 import routerProductos from './routes/productos.js'
 import handlebars from 'express-handlebars'
 import path from 'path';
-import io from 'socket.io';
 import * as http from 'http';
 import { initWsServer } from './services/socket';
+  
+import Config from './config';
+import { connectToDB } from './services/db';
 
+const puerto = Config.PORT;
 const app = express();
+connectToDB();
 const server = http.Server(app);
 
 const myWSServer = initWsServer(server);
 
-const puerto = 8080;
+// const puerto = 8080;
 server.listen(puerto, () => console.log('Server up en puerto', puerto));
 
 const publicPath = path.resolve(__dirname, '../public');
@@ -32,9 +36,9 @@ app.engine(
 const messages = [];
 
 myWSServer.on('connection',  (socket) =>{
-  console.log('\n\nUn cliente se ha conectado');
-    console.log(`ID DEL SOCKET DEL CLIENTE => ${socket.client.id}`);
-    console.log(`ID DEL SOCKET DEL SERVER => ${socket.id}`);
+  console.log('\nUn cliente se ha conectado');
+    // console.log(`ID DEL SOCKET DEL CLIENTE => ${socket.client.id}`);
+    // console.log(`ID DEL SOCKET DEL SERVER => ${socket.id}`);
 
   socket.on('new-message',  (data)=> {
     const newMessage = {

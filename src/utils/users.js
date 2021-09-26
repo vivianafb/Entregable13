@@ -20,6 +20,6 @@ export const getCurrentUser = (id) => {
   return users.find((aUser) => aUser.id === id);
 };
 
-export const getRoomUsers = (room) => {
-  return users.filter((aUser) => aUser.room === room);
-};
+// export const getRoomUsers = (room) => {
+//   return users.filter((aUser) => aUser.room === room);
+// };
