@@ -1,4 +1,5 @@
 import express, { urlencoded } from 'express';
+import session from 'express-session';
 const router = express.Router();
 
 let productos = [
@@ -53,6 +54,49 @@ class Productos{
     }
 }
 
+const myUser = 'vivi';
+router.get('/', (req, res) => {
+  res.render('inicio')
+  console.log(req.cookies)
+
+});
+router.get('/login', (req, res) => {
+
+  const  username  = req.query.username;
+  // const body = req.body;
+  if (username == myUser) {
+    req.session.username = username
+    req.session.loggedIn = true;
+    req.session.contador = 1;
+
+    res.render('main',{username})
+
+  } else res.status(401).json({ msg: 'no estas autorizado' });
+});
+
+
+router.get('/logout', (req, res) => {
+  const  username  = req.session.username;
+  req.session.destroy();
+  if(!req.session) res.render('logout',{username})
+  // setTimeout(() => {
+  //   res.render('inicio',{username})
+  // }, 2000); 
+});
+
+const validateLogIn = (req, res, next) => {
+  if (req.session.loggedIn) next();
+  else res.status(401).json({ msg: 'no estas autorizado' });
+};
+
+// router.get('/secret-endpoint', validateLogIn, (req, res) => {
+//   req.session.contador++;
+//   res.json({
+//     msg: 'informacion super secreta',
+//     contador: req.session.contador,
+//   });
+// });
+
 router.get('/vista', (req, res) => {
   let array = new Productos();
   let lista = array.listar(productos);
@@ -66,7 +110,6 @@ router.get('/vista', (req, res) => {
 });
 
 router.get('/inicio', (req, res) => {
-
     res.render('main')
   });
 
@@ -100,7 +143,6 @@ router.get('/:id', (req, res) => {
       data: producto,
     });
 });
-
 
 router.post('/guardar', (req, res) => {
     let array = new Productos();

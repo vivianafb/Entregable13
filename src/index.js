@@ -4,9 +4,13 @@ import handlebars from 'express-handlebars'
 import path from 'path';
 import * as http from 'http';
 import { initWsServer } from './services/socket';
-  
+
 import Config from './config';
 import { connectToDB } from './services/db';
+
+import session from 'express-session';
+import cookieParser from 'cookie-parser';
+
 
 const puerto = Config.PORT;
 const app = express();
@@ -56,5 +60,18 @@ myWSServer.on('connection',  (socket) =>{
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+const mySecret = 'mySecret';
+app.use(cookieParser(mySecret));
+
+const oneDay = 1000 * 60;
+app.use(
+  session({
+    secret: 'secretkey44545',
+    saveUninitialized:true,
+    cookie: {maxAge: oneDay},
+    resave: false
+  })
+);
 
 app.use('/api/productos', routerProductos);
