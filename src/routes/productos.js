@@ -68,10 +68,17 @@ router.get('/login', (req, res) => {
     req.session.username = username
     req.session.loggedIn = true;
     req.session.contador = 1;
-
     res.render('main',{username})
 
   } else res.status(401).json({ msg: 'no estas autorizado' });
+});
+
+router.get('/info', (req, res) => {
+  res.send({
+    session: req.session,
+    sessionId: req.sessionID,
+    cookies: req.cookies,
+  });
 });
 
 
