@@ -1,5 +1,4 @@
 import express, { urlencoded } from 'express';
-import session from 'express-session';
 const router = express.Router();
 
 let productos = [
@@ -55,11 +54,9 @@ class Productos{
 }
 
 const myUser = 'vivi';
-router.get('/', (req, res) => {
-  res.render('inicio')
-  console.log(req.cookies)
 
-});
+
+
 router.get('/login', (req, res) => {
 
   const  username  = req.query.username;
@@ -81,7 +78,6 @@ router.get('/info', (req, res) => {
   });
 });
 
-
 router.get('/logout', (req, res) => {
   const  username  = req.session.username;
   req.session.destroy();
@@ -90,19 +86,6 @@ router.get('/logout', (req, res) => {
   //   res.render('inicio',{username})
   // }, 2000); 
 });
-
-const validateLogIn = (req, res, next) => {
-  if (req.session.loggedIn) next();
-  else res.status(401).json({ msg: 'no estas autorizado' });
-};
-
-// router.get('/secret-endpoint', validateLogIn, (req, res) => {
-//   req.session.contador++;
-//   res.json({
-//     msg: 'informacion super secreta',
-//     contador: req.session.contador,
-//   });
-// });
 
 router.get('/vista', (req, res) => {
   let array = new Productos();

@@ -37,6 +37,19 @@ a {
 	font-size: 17px;
 }
 
+.titulo{
+	color: blue;
+	font-weight: bold;
+}
+
+.boton {
+	cursor: pointer;
+	padding: 5px 15px;
+	background: #57b10d;
+	color: #fff;
+	border: 0;
+	font-size: 17px;
+}
 /* Chat Page */
 
 .chat-container {

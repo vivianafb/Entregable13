@@ -18,7 +18,7 @@ export const initWsServer = (server) => {
   const io = socketIo(server);
 
   io.on('connection', async (socket) => {
-    console.log('Nueva Conexion establecida!');
+    // console.log('Nueva Conexion establecida!');
      let msges = await getAllMessages();
      socket.emit('receiveMessages', msges);
     //New User Joined room
@@ -69,7 +69,7 @@ export const initWsServer = (server) => {
     // });
 
     socket.on('newMessage', (msge) => {
-      console.log('LLEGO MENSAJE');
+      // console.log('LLEGO MENSAJE');
       addMessage(msge);
       io.emit('newMessage', msge);
       // io.emit('message', formatMessages(data));
